@@ -1,0 +1,12 @@
+query:
+  system: grapes_meso_3km
+  stream: oper
+  type: log
+  name: fcst_ecf_out
+
+file_name: 'fcst.1'
+
+paths:
+  - type: local
+    level: archive
+    path: '/g3/wangdp/project/work/nwpc-log/data/forecast_output/grapes_meso_3km/ecfout_{{ time_vars.Year }}{{ time_vars.Month }}{{ time_vars.Day }}{{ time_vars.Hour }}/model'
