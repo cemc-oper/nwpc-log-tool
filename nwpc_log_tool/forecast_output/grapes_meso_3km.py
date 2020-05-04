@@ -22,3 +22,19 @@ def get_step_time_from_file(file_path):
             index.append(step)
     df = pd.DataFrame(data, index=index)
     return df
+
+
+def get_output_time_from_file(file_path):
+    p = re.compile(r"output modelvar use\s+([0-9.]*)\s+seconds")
+    data = []
+    with open(file_path) as f:
+        for line in f:
+            m = p.search(line)
+            if m is None:
+                continue
+            time = float(m.group(1))
+            data.append({
+                "time": time
+            })
+    df = pd.DataFrame(data)
+    return df
