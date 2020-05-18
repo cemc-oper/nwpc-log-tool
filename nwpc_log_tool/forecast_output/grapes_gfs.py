@@ -27,7 +27,7 @@ def get_step_time_from_file(file_path: str or Path):
     Returns
     -------
     pandas.DataFrame:
-        table data with "valid_time" and "time" as columns, and step number as index.
+        table data with "valid_time", "time", "step" and "ctime" as columns, and step number as index.
     """
     p = re.compile(r"Timing for processing for step\s+(.+):\s+(.+) elapsed seconds\.")
     data = []
@@ -44,4 +44,6 @@ def get_step_time_from_file(file_path: str or Path):
             })
             index.append(step)
     df = pd.DataFrame(data, index=index)
+    df["step"] = df.index
+    df["ctime"] = df["time"].cumsum()
     return df
