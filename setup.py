@@ -50,5 +50,6 @@ setup(
         "pandas",
         "click",
         "tqdm",
+        "scikit-learn"
     ],
 )

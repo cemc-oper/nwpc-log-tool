@@ -2,6 +2,7 @@ import re
 from pathlib import Path
 
 import pandas as pd
+from sklearn import linear_model
 
 
 def get_step_time_from_file(file_path: str or Path):
@@ -47,3 +48,23 @@ def get_step_time_from_file(file_path: str or Path):
     df["step"] = df.index
     df["ctime"] = df["time"].cumsum()
     return df
+
+
+def train_linear_model(df: pd.DataFrame):
+    """
+    Train linear regression model for step and ctime using scikit-learn.
+
+    Parameters
+    ----------
+    df: pandas.DataFrame
+
+    Returns
+    -------
+    sklearn.linear_model.LinearRegression:
+
+    """
+    X = df["step"].values.reshape(-1, 1)
+    y = df["ctime"]
+    model = linear_model.LinearRegression()
+    model.fit(X, y)
+    return model
