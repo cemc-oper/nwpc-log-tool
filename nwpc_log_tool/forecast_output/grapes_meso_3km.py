@@ -1,10 +1,15 @@
+import datetime
 import re
 from pathlib import Path
 
 import pandas as pd
+from sklearn import linear_model
 
 
-def get_step_time_from_file(file_path: str or Path) -> pd.DataFrame:
+def get_step_time_from_file(
+        file_path: str or Path,
+        start_time: datetime.datetime or pd.Timedelta = None,
+) -> pd.DataFrame:
     """
     Get seconds for each step from ecflow job output fcst.1 of GRAPES MESO 3KM.
 
@@ -24,10 +29,13 @@ def get_step_time_from_file(file_path: str or Path) -> pd.DataFrame:
     ----------
     file_path: str or Path
 
+    start_time: datetime.datetime or pandas.Timedelta
+
     Returns
     -------
     pandas.DataFrame:
-        table data with "valid_time", "time", "step" and "ctime" as columns, and step number as index.
+        table data with "valid_time", "time", "step", "ctime", "forecast_hour" and "forecast_hour" as columns,
+        and step number as index.
     """
     p = re.compile(r"Timing for processing for step\s+(.+) \((.*)\):\s+(.+) elapsed seconds\.")
     data = []
@@ -48,6 +56,10 @@ def get_step_time_from_file(file_path: str or Path) -> pd.DataFrame:
     df = pd.DataFrame(data, index=index)
     df["step"] = df.index
     df["ctime"] = df["time"].cumsum()
+    if start_time is None:
+        start_time = df["valid_time"].iloc[0]
+    df["forecast_time"] = df["valid_time"] - start_time
+    df["forecast_hour"] = df["forecast_time"] / pd.Timedelta(hours=1)
     return df
 
 
@@ -88,3 +100,24 @@ def get_output_time_from_file(file_path: str or Path) -> pd.DataFrame:
             })
     df = pd.DataFrame(data)
     return df
+
+
+def train_linear_model(df: pd.DataFrame):
+    """
+    Train linear regression model for forecast_hour and ctime using scikit-learn.
+
+    Parameters
+    ----------
+    df: pandas.DataFrame
+
+    Returns
+    -------
+    sklearn.linear_model.LinearRegression:
+
+    """
+    df = df.copy()
+    X = df["forecast_hour"].values.reshape(-1, 1)
+    y = df["ctime"]
+    model = linear_model.LinearRegression()
+    model.fit(X, y)
+    return model
