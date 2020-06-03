@@ -34,7 +34,7 @@ def get_step_time_from_file(
     Returns
     -------
     pandas.DataFrame:
-        table data with "valid_time", "time", "step", "ctime", "forecast_hour" and "forecast_hour" as columns,
+        table data with "valid_time", "time", "step", "ctime", "forecast_time" and "forecast_hour" as columns,
         and step number as index.
     """
     p = re.compile(r"Timing for processing for step\s+(.+) \((.*)\):\s+(.+) elapsed seconds\.")
