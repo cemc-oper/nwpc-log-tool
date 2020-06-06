@@ -9,7 +9,7 @@ from sklearn import linear_model
 def get_step_time_from_file(
         file_path: str or Path,
         start_time: datetime.datetime or pd.Timedelta = None,
-        time_type: str = "elaspsed",
+        time_type: str = "elapsed",
 ) -> pd.DataFrame:
     """
     Get seconds for each step from ecflow job output fcst.1 of GRAPES MESO systems.
@@ -40,6 +40,7 @@ def get_step_time_from_file(
         table data with "valid_time", "time", "step", "ctime", "forecast_time" and "forecast_hour" as columns,
         and step number as index.
     """
+    seconds_string = f"{time_type} seconds"
     p = re.compile(rf"Timing for processing for step\s+(.+) \((.*)\):\s+(.+) {time_type} seconds\.")
     data = []
     index = []
