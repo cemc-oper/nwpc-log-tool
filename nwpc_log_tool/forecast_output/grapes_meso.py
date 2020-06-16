@@ -105,13 +105,18 @@ def get_output_time_from_file(file_path: str or Path) -> pd.DataFrame:
     return df
 
 
-def train_linear_model(df: pd.DataFrame) -> linear_model.LinearRegression:
+def train_linear_model(
+        df: pd.DataFrame,
+        x_label: str = "forecast_hour",
+) -> linear_model.LinearRegression:
     """
     Train linear regression model for forecast_hour and ctime using scikit-learn.
 
     Parameters
     ----------
     df: pandas.DataFrame
+    x_label: str
+        label for X data. default is forecast_hour.
 
     Returns
     -------
@@ -119,7 +124,7 @@ def train_linear_model(df: pd.DataFrame) -> linear_model.LinearRegression:
 
     """
     df = df.copy()
-    X = df["forecast_hour"].values.reshape(-1, 1)
+    X = df[x_label].values.reshape(-1, 1)
     y = df["ctime"]
     model = linear_model.LinearRegression()
     model.fit(X, y)
