@@ -39,6 +39,25 @@ def get_step_time_from_file(
     pandas.DataFrame:
         table data with "valid_time", "time", "step", "ctime", "forecast_time" and "forecast_hour" as columns,
         and step number as index.
+
+    Examples
+    --------
+    Get step time from GRAPES MESO 3KM at 2020042200 cycle.
+
+    >>> from nwpc_log_tool.data_finder import find_local_file
+    >>> file_path = find_local_file(
+    ...     "grapes_meso_3km/log/fcst_ecf_out",
+    ...     start_time="2020042200",
+    ... )
+    >>> df = get_step_time_from_file(file_path)
+    >>> df.head()
+               valid_time     time  step    ctime forecast_time  forecast_hour
+    1 2020-04-22 00:00:00  10.5766     1  10.5766      00:00:00       0.000000
+    2 2020-04-22 00:00:30   0.6982     2  11.2748      00:00:30       0.008333
+    3 2020-04-22 00:01:00   0.6844     3  11.9592      00:01:00       0.016667
+    4 2020-04-22 00:01:30   0.6830     4  12.6422      00:01:30       0.025000
+    5 2020-04-22 00:02:00   0.6708     5  13.3130      00:02:00       0.033333
+
     """
     p = re.compile(rf"Timing for processing for step\s+(.+) \((.*)\):\s+(.+) {time_type} seconds\.")
     data = []
@@ -121,6 +140,16 @@ def train_linear_model(
     Returns
     -------
     sklearn.linear_model.LinearRegression:
+
+
+    Examples
+    --------
+    Use `df` from the example of ``get_step_time_from_file`` function.
+
+    >>> import numpy as np
+    >>> model = train_linear_model(df)
+    >>> model.predict(np.array(36).reshape(-1, 1))/60
+    [59.69515367]
 
     """
     df = df.copy()
