@@ -40,7 +40,6 @@ def get_step_time_from_file(
         table data with "valid_time", "time", "step", "ctime", "forecast_time" and "forecast_hour" as columns,
         and step number as index.
     """
-    seconds_string = f"{time_type} seconds"
     p = re.compile(rf"Timing for processing for step\s+(.+) \((.*)\):\s+(.+) {time_type} seconds\.")
     data = []
     index = []
