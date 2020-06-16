@@ -1,3 +1,4 @@
+import datetime
 import re
 from pathlib import Path
 
@@ -5,7 +6,9 @@ import pandas as pd
 from sklearn import linear_model
 
 
-def get_step_time_from_file(file_path: str or Path):
+def get_step_time_from_file(
+        file_path: str or Path,
+) -> pd.DataFrame:
     """
     Get seconds for each step from std.out.0000 of GRAPES GFS.
 
@@ -50,7 +53,7 @@ def get_step_time_from_file(file_path: str or Path):
     return df
 
 
-def train_linear_model(df: pd.DataFrame):
+def train_linear_model(df: pd.DataFrame) -> linear_model.LinearRegression:
     """
     Train linear regression model for step and ctime using scikit-learn.
 

@@ -106,7 +106,7 @@ def get_output_time_from_file(file_path: str or Path) -> pd.DataFrame:
     return df
 
 
-def train_linear_model(df: pd.DataFrame):
+def train_linear_model(df: pd.DataFrame) -> linear_model.LinearRegression:
     """
     Train linear regression model for forecast_hour and ctime using scikit-learn.
 
