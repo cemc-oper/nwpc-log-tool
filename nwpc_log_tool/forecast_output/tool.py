@@ -22,8 +22,8 @@ def generate_message_data(
     valid_time = start_time + forecast_time
 
     data = {
+        "start_time": start_time.isoformat(),
         "request": {
-            "start_time": start_time.isoformat(),
             "forecast_time": f"{forecast_hour}h",
             "valid_time": valid_time.isoformat(),
         },
