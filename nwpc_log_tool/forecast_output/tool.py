@@ -6,7 +6,7 @@ import numpy as np
 
 def generate_message_data(
         start_time: datetime.datetime or pd.Timestamp,
-        forecast_hour: int,
+        forecast_hour: float,
         forecast_length: int,
         current_record: pd.DataFrame,
         model,
@@ -21,10 +21,12 @@ def generate_message_data(
     forecast_time = pd.Timedelta(f"{forecast_hour}h")
     valid_time = start_time + forecast_time
 
+    predict_time = pd.Timedelta(f"{forecast_length}h")
+
     data = {
         "start_time": start_time.isoformat(),
         "request": {
-            "forecast_time": f"{forecast_hour}h",
+            "forecast_time": forecast_time.isoformat(),
             "valid_time": valid_time.isoformat(),
         },
         "current": {
@@ -39,7 +41,7 @@ def generate_message_data(
         },
         "predict": {
             "total": {
-                "forecast_time": f"{forecast_length}h",
+                "forecast_time": predict_time.isoformat(),
                 "ctime": predict_minutes
             }
         }

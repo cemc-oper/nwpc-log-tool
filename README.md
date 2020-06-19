@@ -1,6 +1,6 @@
 # nwpc-log-tool
 
-A log tool for NWPC.
+A log tool for GRAPES operation systems in NWPC/CMA.
 
 ## LICENSE
 

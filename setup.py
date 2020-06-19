@@ -18,7 +18,7 @@ setup(
 
     version=version,
 
-    description='A tool for logs produced by NWPC operation systems.',
+    description='A log tool for operation systems in NWPC/CMA.',
     long_description=long_description,
     long_description_content_type='text/markdown',
 
