@@ -9,8 +9,18 @@ file_name: 'std.out_fcst_{{ time_vars.Year }}{{ time_vars.Month }}{{ time_vars.D
 paths:
   - type: local
     level: archive
+    path: '/g1/COMMONDATA/OPER/NWPC/GRAPES_GFS_GMF/Log/{{ time_vars.Year }}{{ time_vars.Month }}{{ time_vars.Day }}{{ time_vars.Hour }}'
+
+
+  - type: local
+    level: archive
     path: '/g1/COMMONDATA/OPER/NWPC/GRAPES_GFS_GMF/Log/{{ time_vars.Year4DV }}{{ time_vars.Month4DV }}{{ time_vars.Day4DV }}{{ time_vars.Hour4DV }}'
 
   - type: local
     level: storage
-    path: '/sstorage1/COMMONDATA/OPER/NWPC/GRAPES_GFS_GMF/Log/{{ time_vars.Year4DV }}{{ time_vars.Month4DV }}{{ time_vars.Day4DV }}{{ time_vars.Hour4DV }}'
+    path: '/sstorage1/COMMONDATA/OPER/NWPC/GRAPES_GFS_GMF/Log/{{ time_vars.Year }}{{ time_vars.Month }}{{ time_vars.Day }}{{ time_vars.Hour }}'
+
+
+  - type: local
+    level: archive
+    path: '/g1/COMMONDATA/OPER/NWPC/GRAPES_GFS_GMF/Log/{{ time_vars.Year4DV }}{{ time_vars.Month4DV }}{{ time_vars.Day4DV }}{{ time_vars.Hour4DV }}'
