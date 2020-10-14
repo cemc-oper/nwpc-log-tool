@@ -1,13 +1,14 @@
+import typing
 from pathlib import Path
 
 from nwpc_data.data_finder import find_local_file as _find_local_file
 
 
 def find_local_file(
-        data_type,
-        config_dir: str or Path or None = None,
+        data_type: str,
+        config_dir: typing.Optional[typing.Union[str, Path]] = None,
         **kwargs,
-) -> Path or None:
+) -> typing.Optional[Path]:
     """
     Find files using ``nwpc_data.data_finder.find_local_file`` with config files under conf directory.
 
@@ -45,5 +46,5 @@ def find_local_file(
     )
 
 
-def _get_default_local_config_path():
+def _get_default_local_config_path() -> Path:
     return Path(Path(__file__).parent, "conf").absolute()

@@ -1,4 +1,5 @@
 import datetime
+import typing
 import re
 from pathlib import Path
 
@@ -7,8 +8,8 @@ from sklearn import linear_model
 
 
 def get_step_time_from_file(
-        file_path: str or Path,
-        start_time: datetime.datetime or pd.Timedelta = None,
+        file_path: typing.Union[str, Path],
+        start_time: typing.Union[datetime.datetime, pd.Timedelta] = None,
         time_type: str = "elapsed",
 ) -> pd.DataFrame:
     """

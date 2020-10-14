@@ -1,11 +1,12 @@
 import datetime
+import typing
 
 import pandas as pd
 import numpy as np
 
 
 def generate_message_data(
-        start_time: datetime.datetime or pd.Timestamp,
+        start_time: typing.Union[datetime.datetime, pd.Timestamp],
         forecast_hour: float,
         forecast_length: int,
         current_record: pd.DataFrame,
