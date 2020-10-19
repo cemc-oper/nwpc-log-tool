@@ -3,6 +3,7 @@ import typing
 
 import pandas as pd
 import numpy as np
+from sklearn import linear_model
 
 
 def generate_message_data(
@@ -10,12 +11,14 @@ def generate_message_data(
         forecast_hour: float,
         forecast_length: int,
         current_record: pd.DataFrame,
-        model,
-) -> dict:
+        model: linear_model.LinearRegression,
+) -> typing.Dict:
     coef = model.coef_[0]
     intercept = model.intercept_
 
-    predict_minutes = model.predict(np.reshape(forecast_length, (-1, 1)))[0] / 60
+    predict_minutes = model.predict(
+        np.reshape(forecast_length, (-1, 1))
+    )[0] / 60
     print(predict_minutes)
 
     start_time = pd.to_datetime(start_time, format="%Y%m%d%H")
