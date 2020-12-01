@@ -9,4 +9,12 @@ file_name: 'fcst.1'
 paths:
   - type: local
     level: archive
-    path: '/g3/wangdp/project/work/nwpc-log/data/forecast_output/grapes_meso_3km/ecfout_{{ time_vars.Year }}{{ time_vars.Month }}{{ time_vars.Day }}{{ time_vars.Hour }}/model'
+    path: '/g11/wangdp/project/work/nwpc-log/data/forecast_output/grapes_meso_3km/cold_{{ time_vars.Year }}{{ time_vars.Month }}{{ time_vars.Day }}{{ time_vars.Hour }}/model'
+
+  - type: local
+    level: archive
+    path: '/g11/wangdp/project/work/nwpc-log/data/forecast_output/grapes_meso_3km/warm_{{ time_vars.Year }}{{ time_vars.Month }}{{ time_vars.Day }}{{ time_vars.Hour }}/model'
+
+  - type: local
+    level: archive
+    path: '/g11/wangdp/project/work/nwpc-log/data/forecast_output/grapes_meso_3km/old/ecfout_{{ time_vars.Year }}{{ time_vars.Month }}{{ time_vars.Day }}{{ time_vars.Hour }}/model'
