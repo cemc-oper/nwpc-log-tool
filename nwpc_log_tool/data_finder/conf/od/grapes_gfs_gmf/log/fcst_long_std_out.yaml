@@ -9,6 +9,10 @@ file_name: 'std.out_fcst_{{ time_vars.Year }}{{ time_vars.Month }}{{ time_vars.D
 paths:
   - type: local
     level: archive
+    path: '/g11/wangdp/project/work/nwpc-log/data/forecast_output/grapes_gfs_gmf'
+
+  - type: local
+    level: archive
     path: '/g1/COMMONDATA/OPER/NWPC/GRAPES_GFS_GMF/Log/{{ time_vars.Year }}{{ time_vars.Month }}{{ time_vars.Day }}{{ time_vars.Hour }}'
 
   - type: local
