@@ -1,5 +1,5 @@
 import datetime
-import typing
+from typing import Union, Optional
 import re
 from pathlib import Path
 
@@ -8,8 +8,8 @@ from sklearn import linear_model
 
 
 def get_step_time_from_file(
-        file_path: typing.Union[str, Path],
-        start_time: typing.Union[datetime.datetime, pd.Timedelta] = None,
+        file_path: Union[str, Path],
+        start_time: Union[datetime.datetime, pd.Timedelta] = None,
         time_type: str = "elapsed",
 ) -> pd.DataFrame:
     """
@@ -86,7 +86,7 @@ def get_step_time_from_file(
     return df
 
 
-def get_output_time_from_file(file_path: str or Path) -> pd.DataFrame:
+def get_output_time_from_file(file_path: Union[str, Path], data_type: Optional[str] = None) -> pd.DataFrame:
     """
     Get seconds for modelvar output from ecflow job output fcst.1 of GRAPES MESO systems.
 
@@ -103,14 +103,23 @@ def get_output_time_from_file(file_path: str or Path) -> pd.DataFrame:
 
     Parameters
     ----------
-    file_path: str or Path
+    file_path
+
+    data_type
+        * None: all data
+        * modelvar: model var
+        * post: post var
 
     Returns
     -------
     pandas.DataFrame:
         table data with "time" as column.
     """
-    p = re.compile(r"output modelvar use\s+([0-9.]*)\s+seconds")
+    # p = re.compile(r"output modelvar use\s+([0-9.]*)\s+seconds")
+    if data_type is None:
+        p = re.compile(r"output use\s+([0-9.]*)\s+seconds")
+    else:
+        p = re.compile(r"{data_type} output use\s+([0-9.]*)\s+seconds")
     data = []
     with open(file_path) as f:
         for line in f:
