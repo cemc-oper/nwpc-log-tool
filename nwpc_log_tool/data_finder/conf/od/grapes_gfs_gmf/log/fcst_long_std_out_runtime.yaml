@@ -9,8 +9,8 @@ file_name: 'std.out.0000'
 paths:
   - type: local
     level: runtime
-    path: '/g2/nwp/GRAPES_GFS3.2_DATA/MODEL/NWP_GMFS/{{ time_vars.Hour }}/output'
+    path: '/g0/nwp/CMA-GFS4.0_DATA/MODEL/NWP_GMFS/{{ time_vars.Hour }}/output'
 
-  - type: local
-    level: runtime
-    path: '/g2/nwp/GRAPES_GFS_DATA/MODEL/NWP_GMFS/{{ time_vars.Hour4DV }}/output'
+#  - type: local
+#    level: runtime
+#    path: '/g2/nwp/GRAPES_GFS_DATA/MODEL/NWP_GMFS/{{ time_vars.Hour4DV }}/output'
